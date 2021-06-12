@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Pedidos, LineaDePedidos, CentroDistribucion
+from .models import Pedidos, LineaDePedidos, CentroDistribuciones
 
 
 # class CentroDistribucionAdmin(admin.ModelAdmin):

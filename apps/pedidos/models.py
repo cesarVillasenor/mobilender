@@ -3,16 +3,16 @@ from apps.clientes.models import Clientes
 from apps.articulos.models import Articulos
 
 
-class CentroDistribucion(models.Model):
+class CentroDistribuciones(models.Model):
     almacen = models.CharField(max_length=30, null=True, blank=True)
 
 
-class Sucursal(models.Model):
+class Sucursales(models.Model):
     referencia_sucursal = models.CharField(max_length=30, null=True, blank=True)
     codigo_sucursal = models.IntegerField(null=True, blank=True)
 
 
-class Empresa(models.Model):
+class Empresas(models.Model):
     referencia_empresa = models.CharField(max_length=30, null=True, blank=True)
     codigo_empresa = models.IntegerField(null=True, blank=True)
 
@@ -30,9 +30,9 @@ class Pedidos(models.Model):
     urgente = models.BooleanField()
     cantidad = models.IntegerField()
     tipo = models.PositiveSmallIntegerField(choices=OPCIONES_TIPOS_PEDIDOS)
-    centro_distribucion = models.ForeignKey(to=CentroDistribucion, on_delete=models.PROTECT)
-    sucursal = models.ForeignKey(to=Sucursal, on_delete=models.PROTECT)
-    empresa = models.ForeignKey(to=Empresa, on_delete=models.PROTECT)
+    centro_distribucion = models.ForeignKey(to=CentroDistribuciones, on_delete=models.PROTECT)
+    sucursal = models.ForeignKey(to=Sucursales, on_delete=models.PROTECT)
+    empresa = models.ForeignKey(to=Empresas, on_delete=models.PROTECT)
 
 
 class LineaDePedidos(models.Model):
