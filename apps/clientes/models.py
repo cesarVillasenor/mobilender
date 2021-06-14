@@ -10,7 +10,13 @@ class Clientes(models.Model):
     ]
 
     nombre = models.CharField(max_length=30)
-    codigo =  models.CharField(max_length=30)
-    fotografia = models.ImageField(upload_to="clientes/fotografia/")
+    codigo = models.CharField(max_length=30, unique=True)
+    fotografia = models.ImageField(upload_to="clientes/fotografia/", blank=True, null=True)
     direccion = models.CharField(max_length=50)
     tipo = models.PositiveSmallIntegerField(choices=OPCIONES_TIPOS_CLIENTES, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Clientes"
+
+    def __str__(self):
+        return self.nombre
