@@ -19,8 +19,8 @@
 <body>
 {% include 'mobilender/header.html' %}
 <main>
-    <div>
-        <div>
+    <div class="white">
+        <div class="container">
             {% block contenido %}{% endblock %}
         </div>
     </div>
@@ -29,6 +29,9 @@
 <!--<script src="{% static 'js/jquery-3.2.1.min.js' %} "></script>-->
 <script src="{% static 'js/materialize.min.js' %} "></script>
 <script src="{% static 'js/base.js' %} "></script>
+<script>
+     M.AutoInit();
+</script>
 {% block extra_js %}{% endblock %}
 </body>
 </html>
