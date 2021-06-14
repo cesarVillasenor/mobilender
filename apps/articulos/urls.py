@@ -3,8 +3,8 @@ from .api.viewsets import ArticulosViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'api/articulos', ArticulosViewSet)
+router.register(r'articulos', ArticulosViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]
