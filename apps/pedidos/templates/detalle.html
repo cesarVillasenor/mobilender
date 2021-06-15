@@ -1,0 +1,32 @@
+{% extends "mobilender/base.html" %}
+{% load static  %}
+{% block contenido %}
+<h1> Detalle De Pedido # {{ id }} </h1>
+<br>
+<br>
+<div class="row grey lighten-4">
+    <div class="col s10">
+        <h2>Articulos</h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>Codigo Articulo</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Descripcion</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for a in data.articulos %}
+            <tr>
+                <td>{{ a.articulos.codigo }}</td>
+                <td>{{ a.cantidad }}</td>
+                <td>{{ a.articulos.precio }}</td>
+                <td>{{ a.articulos.descripcion }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "mobilender/base.html" %}
+{% load static  %}
+{% block contenido %}
+<h1> Crear Pedido </h1>
+<br>
+<br>
+<div class="row grey lighten-4  ">
+    <form id="f1" class="col s8" action="/pedidos/api/crear-pedidos" method="POST" >{% csrf_token %}
+        <div class="row">
+            <div class="input-field col s6">
+                <input placeholder="# pedido" id="numero_pedido" name="numero_pedido" type="number" min="1"
+                       class="validate" required>
+                <label for="numero_pedido"># Pedido</label>
+            </div>
+        </div>
+        <label for="cliente">Selecciona un Cliente</label>
+        <select id="cliente" name="cliente" class="browser-default" required>
+            <option value="" disabled selected>Escoge una Opcion</option>
+            {% for c in data.clientes %}
+            <option value="{{ c.id }}">{{ c.nombre }}</option>
+            {% endfor %}
+        </select>
+        <p>
+            <label>
+                <input name="urgente" type="checkbox"/>
+                <span>Urgente</span>
+            </label>
+        </p>
+        <label for="tipo">Selecciona un Tipo</label>
+        <select onchange="mostrar(this)" id="tipo" name="tipo" class="browser-default" required>
+            <option value="" disabled selected>Escoge una Opcion</option>
+            {% for t in data.tipos %}
+            <option value="{{ t.0 }}">{{ t.1 }}</option>
+            {% endfor %}
+        </select>
+        <label id="l-centro-distribucion" for="centro-distribucion" class="hide">
+            Selecciona un Centro de Distribucion
+        </label>
+        <select id="centro-distribucion" name="centro_distribucion" class="browser-default hide">
+            <option value="" disabled selected>Escoge una Opcion</option>
+            {% for cd in data.centro_distribuciones %}
+            <option value="{{ cd.id }}">{{ cd.almacen }}</option>
+            {% endfor %}
+        </select>
+        <label id="l-sucursal" for="sucursal" class="hide">
+            Selecciona un Sucursal
+        </label>
+        <select id="sucursal" name="sucursal" class="browser-default hide">
+            <option value="" disabled selected>Escoge una Opcion</option>
+            {% for s in data.sucursales %}
+            <option value="{{ s.id }}">{{ s.referencia }}</option>
+            {% endfor %}
+        </select>
+        <label id="l-empresa" for="empresa" class="hide">
+            Selecciona un Empresa
+        </label>
+        <select id="empresa" name="empresa" class="browser-default hide">
+            <option value="" disabled selected>Escoge una Opcion</option>
+            {% for e in data.empresas %}
+            <option value="{{ e.id }}">{{ e.referencia }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        {% for a in data.articulos %}
+        <div class="row">
+            <div class="input-field col s6">
+                <input placeholder="Cantidad" id="articulo{{ a.id }}" name="articulo{{ a.id }}" type="number" min="1" class="validate">
+                <label for="articulo{{ a.id }}">{{ a.codigo }}</label>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row">
+            <div class="input-field col s6">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Crear
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/jquery-3.6.0.min.js' %} "></script>
+<script>
+$("#f1").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var form = $(this);
+    var url = form.attr('action');
+    console.log(form.serialize());
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(),
+           success: function(data)
+           {
+               alert("success");
+           },
+           error: function(data, status,) {
+                alert(data.responseText);
+            },
+         });
+
+
+});
+
+function mostrar(select){
+    v = select.value;
+    centro_distribucion = document.getElementById("centro-distribucion");
+    l_centro_distribucion = document.getElementById("l-centro-distribucion");
+    sucursal = document.getElementById("sucursal");
+    l_sucursal = document.getElementById("l-sucursal");
+    empresa = document.getElementById("empresa");
+    l_empresa = document.getElementById("l-empresa");
+    if(v == 1){
+        centro_distribucion.classList.remove("hide");
+        l_centro_distribucion.classList.remove("hide");
+        sucursal.classList.add("hide");
+        l_sucursal.classList.add("hide");
+        empresa.classList.add("hide");
+        l_empresa.classList.add("hide");
+    }
+    else if(v == 2){
+        centro_distribucion.classList.add("hide");
+        l_centro_distribucion.classList.add("hide");
+        sucursal.classList.remove("hide");
+        l_sucursal.classList.remove("hide");
+        empresa.classList.add("hide");
+        l_empresa.classList.add("hide");
+    }
+    else{
+        centro_distribucion.classList.add("hide");
+        l_centro_distribucion.classList.add("hide");
+        sucursal.classList.add("hide");
+        l_sucursal.classList.add("hide");
+        empresa.classList.remove("hide");
+        l_empresa.classList.remove("hide");
+    }
+}
+</script>
+
+{% endblock %}
