@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+        - ./deploy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+        - "8000:80"
+    depends_on:
+        - mobilender_web
+
+  mobilender_web:
+    image: mobilender
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
