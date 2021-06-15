@@ -1,9 +1,17 @@
 from django.contrib import admin
-from .models import Pedidos, LineaDePedidos, CentroDistribuciones
+from .models import Pedidos, LineaDePedidos, CentroDistribuciones, Sucursales, Empresas
 
 
-# class CentroDistribucionAdmin(admin.ModelAdmin):
-#     list_display = ['almacen']
+class CentroDistribucionAdmin(admin.ModelAdmin):
+    list_display = ['almacen']
+
+
+class SucursalesAdmin(admin.ModelAdmin):
+    list_display = ['referencia', 'codigo']
+
+
+class EmpresasAdmin(admin.ModelAdmin):
+    list_display = ['referencia', 'codigo']
 
 
 class LineaDePedidosInline(admin.TabularInline):
@@ -17,4 +25,6 @@ class PedidosAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Pedidos, PedidosAdmin)
-# admin.site.register(CentroDistribucion, CentroDistribucionAdmin)
+admin.site.register(CentroDistribuciones, CentroDistribucionAdmin)
+admin.site.register(Empresas, EmpresasAdmin)
+admin.site.register(Sucursales, SucursalesAdmin)
