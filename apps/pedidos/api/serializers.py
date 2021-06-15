@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 
 class CentroDistribucionesSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = CentroDistribuciones
         fields = '__all__'
@@ -21,12 +22,28 @@ class EmpresasSerializer(serializers.ModelSerializer):
 
 
 class PedidosSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Pedidos
         fields = '__all__'
+
+
+class PedidosReadSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Pedidos
+        fields = '__all__'
+        depth = 1
 
 
 class LineaDePedidosSerializer(serializers.ModelSerializer):
     class Meta:
         model = LineaDePedidos
         fields = '__all__'
+
+
+class LineaDePedidosReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LineaDePedidos
+        fields = '__all__'
+        depth = 1
