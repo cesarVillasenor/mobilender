@@ -37,7 +37,25 @@ class DashboardDataView(APIView):
     def get(self, request):
         pedidos_urgentes = Pedidos.objects.filter(tipo=1).filter(cliente__tipo=4).filter(fecha_hora_surtido__isnull=True)
         serializer = PedidosReadSerializer(pedidos_urgentes, many=True)
-        data = {"pedidos_urgentes": serializer.data}
+        pendientes = Pedidos.obeter_total_pedidos_pendientes()
+        realizados = Pedidos.obeter_total_pedidos_realizados()
+        pedidos_cliente_normal = Pedidos.obtener_ultimos_pedidos_cliente_normal()
+        serializer_normal = PedidosReadSerializer(pedidos_cliente_normal, many=True)
+        pedidos_cliente_plata = Pedidos.obtener_ultimos_pedidos_cliente_plata()
+        serializer_plata = PedidosReadSerializer(pedidos_cliente_plata, many=True)
+        pedidos_cliente_oro = Pedidos.obtener_ultimos_pedidos_cliente_oro()
+        serializer_oro = PedidosReadSerializer(pedidos_cliente_oro, many=True)
+        pedidos_cliente_platino = Pedidos.obtener_ultimos_pedidos_cliente_platino()
+        serializer_platino = PedidosReadSerializer(pedidos_cliente_platino, many=True)
+        data = {
+            "pedidos_urgentes": serializer.data,
+            "pedidos_pendientes": pendientes,
+            "pedidos_realizados": realizados,
+            "pedidos_cliente_normal": serializer_normal.data,
+            "pedidos_cliente_plata": serializer_plata.data,
+            "pedidos_cliente_oro": serializer_oro.data,
+            "pedidos_cliente_platino": serializer_platino.data,
+        }
         return Response(data)
 
 

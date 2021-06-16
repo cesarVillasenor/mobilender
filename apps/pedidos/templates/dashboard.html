@@ -6,7 +6,7 @@
 <br>
 <div class="row grey lighten-4">
     <div class="col s10">
-        <h2>Pedidos Urgentes </h2>
+        <h2>Pedidos Urgentes Clientes platino a Centro de Distribucion</h2>
         <table class="centered">
             <thead>
             <tr>
@@ -19,6 +19,138 @@
             </thead>
             <tbody>
             {% for p in data.pedidos_urgentes %}
+            <tr>
+                <td>#{{ p.numero_pedido }}</td>
+                <td>{{ p.fecha_hora_generado }}</td>
+                <td>{{ p.cliente.nombre }}</td>
+                <td>{{ p.cliente.direccion }}</td>
+                <td><a href="/pedidos/{{ p.id }}">Detalle</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row grey lighten-4">
+    <h2> Estatus de Pedidos</h2>
+    <div class="col s4">
+        <div class="card yellow darken-3">
+            <div class="card-content white-text center-align">
+                <span class="card-title">Pedidos Pendientes</span>
+                <h2>{{ data.pedidos_pendientes}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col s4">
+        <div class="card green darken-3">
+            <div class="card-content white-text center-align">
+                <span class="card-title">Pedidos Realizados</span>
+                <h2> {{ data.pedidos_realizados }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row grey lighten-4">
+    <div class="col s10">
+        <h2>Ultimos Pedidos Clientes Normal </h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>Numero de Pedido</th>
+                <th>Fecha y hora generada</th>
+                <th>Cliente</th>
+                <th>Direccion del Cliente</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in data.pedidos_cliente_normal %}
+            <tr>
+                <td>#{{ p.numero_pedido }}</td>
+                <td>{{ p.fecha_hora_generado }}</td>
+                <td>{{ p.cliente.nombre }}</td>
+                <td>{{ p.cliente.direccion }}</td>
+                <td><a href="/pedidos/{{ p.id }}">Detalle</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row grey lighten-4">
+    <div class="col s10">
+        <h2>Ultimos Pedidos Clientes Plata </h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>Numero de Pedido</th>
+                <th>Fecha y hora generada</th>
+                <th>Cliente</th>
+                <th>Direccion del Cliente</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in data.pedidos_cliente_plata %}
+            <tr>
+                <td>#{{ p.numero_pedido }}</td>
+                <td>{{ p.fecha_hora_generado }}</td>
+                <td>{{ p.cliente.nombre }}</td>
+                <td>{{ p.cliente.direccion }}</td>
+                <td><a href="/pedidos/{{ p.id }}">Detalle</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row grey lighten-4">
+    <div class="col s10">
+        <h2>Ultimos Pedidos Clientes Oro </h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>Numero de Pedido</th>
+                <th>Fecha y hora generada</th>
+                <th>Cliente</th>
+                <th>Direccion del Cliente</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in data.pedidos_cliente_oro %}
+            <tr>
+                <td>#{{ p.numero_pedido }}</td>
+                <td>{{ p.fecha_hora_generado }}</td>
+                <td>{{ p.cliente.nombre }}</td>
+                <td>{{ p.cliente.direccion }}</td>
+                <td><a href="/pedidos/{{ p.id }}">Detalle</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row grey lighten-4">
+    <div class="col s10">
+        <h2>Ultimos Pedidos Clientes Platino </h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>Numero de Pedido</th>
+                <th>Fecha y hora generada</th>
+                <th>Cliente</th>
+                <th>Direccion del Cliente</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in data.pedidos_cliente_platino %}
             <tr>
                 <td>#{{ p.numero_pedido }}</td>
                 <td>{{ p.fecha_hora_generado }}</td>
