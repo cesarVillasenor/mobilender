@@ -37,6 +37,13 @@ class Empresas(models.Model):
 
 
 class Pedidos(models.Model):
+
+    @classmethod
+    def create(cls):
+        pedido = cls()
+        return pedido
+
+
     OPCIONES_TIPOS_PEDIDOS = [
         (1, 'Centro  de Distribucion'),
         (2, "Sucursal"),
@@ -58,22 +65,28 @@ class Pedidos(models.Model):
     def __str__(self):
         return "#" + str(self.numero_pedido)
 
-    def obeter_total_pedidos_realizados(self):
+    @staticmethod
+    def obeter_total_pedidos_realizados():
         return Pedidos.objects.filter(fecha_hora_surtido__isnull=False).count()
 
-    def obeter_total_pedidos_pendientes(self):
+    @staticmethod
+    def obeter_total_pedidos_pendientes():
         return Pedidos.objects.filter(fecha_hora_surtido__isnull=True).count()
 
-    def obtener_ultimos_pedidos_cliete_normal(self):
+    @staticmethod
+    def obtener_ultimos_pedidos_cliente_normal():
         return Pedidos.objects.filter(cliente__tipo=1)[:10]
 
-    def obtener_ultimos_pedidos_cliete_plata(self):
+    @staticmethod
+    def obtener_ultimos_pedidos_cliente_plata():
         return Pedidos.objects.filter(cliente__tipo=2)[:10]
 
-    def obtener_ultimos_pedidos_cliete_oro(self):
+    @staticmethod
+    def obtener_ultimos_pedidos_cliente_oro():
         return Pedidos.objects.filter(cliente__tipo=3)[:10]
 
-    def obtener_ultimos_pedidos_cliete_platino(self):
+    @staticmethod
+    def obtener_ultimos_pedidos_cliente_platino():
         return Pedidos.objects.filter(cliente__tipo=4)[:10]
 
 
